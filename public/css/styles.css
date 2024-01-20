@@ -1,0 +1,30 @@
+.header{
+    background-color: bisque;
+    padding-bottom: 20px;
+}
+
+.bodydiv{
+    display: inline-flex;
+    background-color: aqua;
+}
+
+.menu{
+    background-color: aqua;
+    padding: 10% 20px;
+}
+
+.danh-sach{
+    padding-bottom: 25px;
+}
+
+
+
+
+
+.layout{
+    background-color: bisque;padding-top: 20px;
+}
+
+.AnhSP{
+    width: 50px;
+}
