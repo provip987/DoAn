@@ -50,14 +50,22 @@ Route::middleware('auth')->group(function () {
     });
 });
 
-//client
 
-Route::get('KhachHang/DS', [KhachHangController::class, 'DanhSachKH'])->name('KhachHang.DanhSach');
-Route::get('KhachHang/Them', [KhachHangController::class, 'themKhachHang'])->name('KhachHang.Them');
-Route::post('KhachHang/Them', [KhachHangController::class, 'xulythemkhachhang'])->name('KhachHang.XuLyThem');
-Route::get('KhachHang/Sua/{id}', [KhachHangController::class, 'capnhatkhachhang'])->name('KhachHang.Sua');
-Route::post('KhachHang/Sua/{id}', [KhachHangController::class, 'xulycapnhatkhachhang'])->name('KhachHang.XuLySua');
-Route::get('KhachHang/xoaKhachHang/{id}', [KhachHangController::class, 'xulyxoakhachhang'])->name('KhachHang.Xoa');
+
+Route::middleware('auth')->group(function () {
+    Route::prefix('KhachHang')->group(function () {
+        Route::name('KhachHang.')->group(function () {
+            Route::get('Danhsach', [KhachHangController::class, 'DanhSachKH'])->name('DanhSach');
+            Route::get('Them', [KhachHangController::class, 'themKhachHang'])->name('Them');
+            Route::post('XuLyThem', [KhachHangController::class, 'xulythemkhachhang'])->name('XuLyThem');
+            Route::get('/Sua/{id}', [KhachHangController::class, 'capnhatkhachhang'])->name('Sua');
+            Route::post('Sua/{id}', [KhachHangController::class, 'xulycapnhatkhachhang'])->name('XuLySua');
+            Route::get('xoaKhachHang/{id}', [KhachHangController::class, 'xulyxoakhachhang'])->name('Xoa');
+        });
+    });
+});
+
+
 
 //san pham
 
@@ -67,8 +75,8 @@ Route::middleware('auth')->group(function () {
             Route::get('Them', [SanPhamController::class, 'Them'])->name('Them');
             Route::post('XuLyThem', [SanPhamController::class, 'XuLyThem'])->name('XuLyThem');
             Route::get('danh-sach', [SanPhamController::class, 'DanhSach'])->name('DanhSach');
-          
-           
+
+
             Route::get('Sua/{id}', [SanPhamController::class, 'Sua'])->name('Sua');
             Route::post('Sua/{id}', [SanPhamController::class, 'XuLySua'])->name('XuLySua');
             Route::get('xoa/{id}', [SanPhamController::class, 'XuLyXoa'])->name('Xoa');
@@ -86,59 +94,90 @@ Route::middleware('auth')->group(function () {
 
 
 
+Route::middleware('auth')->group(function () {
+    Route::prefix('Size')->group(function () {
+        Route::name('Size.')->group(function () {
+            Route::get('DanhSach', [SizeController::class, 'DanhSachSize'])->name('DanhSach');
+            Route::get('Them', [SizeController::class, 'Them'])->name('Them');
+            Route::post('Them', [SizeController::class, 'XuLyThem'])->name('XuLyThem');
+            Route::get('Xoa/{id}', [SizeController::class, 'XuLyXoa'])->name('Xoa');
+            Route::get('Sua/{id}', [SizeController::class, 'Sua'])->name('Sua');
+            Route::post('Sua/{id}', [SizeController::class, 'XuLySua'])->name('XuLySua');
 
+        });
+    });
+});
 //Nhan vien
 
-Route::get('NhanVien/DS', [NhanVienController::class, 'DSNV'])->name('DSNV'); 
-Route::get('NhanVien/themnv', [NhanVienController::class, 'themnv'])->name('themnv');
-Route::post('NhanVien/themnv', [NhanVienController::class, 'xulythemnv'])->name('xulythemnv');
-Route::get('NhanVien/xoa/{id}', [NhanVienController::class, 'XuLyXoa'])->name('xoanhanvien');
-Route::get('NhanVien/sua/{id}', [NhanVienController::class, 'Sua'])->name('suanhanvien');
-Route::post('NhanVien/sua/{id}', [NhanVienController::class, 'XuLySua'])->name('NhanVien.xualysua');
+Route::middleware('auth')->group(function () {
+    Route::prefix('NhanVien')->group(function () {
+        Route::name('NhanVien.')->group(function () {
+            Route::get('danh-sach', [NhanVienController::class, 'DSNV'])->name('DanhSach');
+            Route::get('Them', [NhanVienController::class, 'themnv'])->name('Them');
+            Route::post('Them', [NhanVienController::class, 'xulythemnv'])->name('XuLyThem');
+            Route::get('xoa/{id}', [NhanVienController::class, 'XuLyXoa'])->name('Xoa');
+            Route::get('sua/{id}', [NhanVienController::class, 'Sua'])->name('Sua');
+            Route::post('sua/{id}', [NhanVienController::class, 'XuLySua'])->name('XuLySua');
+        });
+    });
+});
 
 //NhaCungCap
+Route::middleware('auth')->group(function () {
+    Route::prefix('NhaCungCap')->group(function () {
+        Route::name('NhaCungCap.')->group(function () {
 
-Route::get('NhaCungCap/san-pham', [NhaCungCapController::class, 'DanhSach'])->name('NhaCungCap.DanhSach');
-Route::get('NhaCungCap/them', [NhaCungCapController::class, 'Them'])->name('NhaCungCap.Them');
-Route::post('NhaCungCap/them', [NhaCungCapController::class, 'XuLyThem'])->name('NhaCungCap.XuLyThem');
-Route::get('NhaCungCap.Sua/{id}', [NhaCungCapController::class, 'Sua'])->name('NhaCungCap.Sua');
-Route::post('NhaCungCap.Sua/{id}', [NhaCungCapController::class, 'XuLySua'])->name('NhaCungCap.XuLySua');
-Route::get('NhaCungCap.Xoa/{id}', [NhaCungCapController::class, 'XuLyXoa'])->name('NhaCungCap.XuLyXoa');
+            Route::get('danh-sach', [NhaCungCapController::class, 'DanhSach'])->name('DanhSach');
+            Route::get('them', [NhaCungCapController::class, 'Them'])->name('Them');
+            Route::post('them', [NhaCungCapController::class, 'XuLyThem'])->name('XuLyThem');
+            Route::get('Sua/{id}', [NhaCungCapController::class, 'Sua'])->name('Sua');
+            Route::post('Sua/{id}', [NhaCungCapController::class, 'XuLySua'])->name('XuLySua');
+            Route::get('Xoa/{id}', [NhaCungCapController::class, 'XuLyXoa'])->name('XuLyXoa');
+
+        });
+    });
+});
 
 
 // Đánh giá
 
-Route::get('DanhGia/DanhSach', [DanhGiaController::class, 'DanhSach'])->name('DanhGia.DanhSach');
-Route::post('DanhGia/DanhSach', [DanhGiaController::class, 'Them'])->name('DanhGia.them');
-Route::get('DanhGia/Xoa/{id}', [DanhGiaController::class, 'Xoa'])->name('DanhGia.xoa');
+Route::middleware('auth')->group(function () {
+    Route::prefix('DanhGia')->group(function () {
+        Route::name('DanhGia.')->group(function () {
+            Route::get('DanhSach', [DanhGiaController::class, 'DanhSach'])->name('DanhSach');
+            Route::post('DanhSach', [DanhGiaController::class, 'Them'])->name('them');
+            Route::get('Xoa/{id}', [DanhGiaController::class, 'Xoa'])->name('xoa');
+        });
+    });
+});
 
 
 
-Route::get('Nhap-Hang/DanhSach', [NhaphangController::class, 'DanhSach'])->name('PhieuNhap.DanhSach');
-Route::get('Nhap-Hang/NhapHang', [NhaphangController::class, 'Nhap'])->name('PhieuNhap.Nhap');
-Route::post('Nhap-Hang/nhap-hang', [NhaphangController::class, 'xuLyNhap'])->name('PhieuNhap.xuLyNhap');
+Route::middleware('auth')->group(function () {
+    Route::prefix('NhapHang')->group(function () {
+        Route::name('PhieuNhap.')->group(function () {
+            Route::get('DanhSach', [NhaphangController::class, 'DanhSach'])->name('DanhSach');
+            Route::get('NhapHang', [NhaphangController::class, 'Nhap'])->name('Nhap');
+            Route::post('nhap-hang', [NhaphangController::class, 'xuLyNhap'])->name('xuLyNhap');
+            Route::get('Chi-Tiet/DanhSach/{id}', [NhaphangController::class, 'danhSachChiTietNhapHang'])->name('danhSachChiTiet');
+            Route::get('xoa/{id}', [NhaphangController::class, 'xoaNhapHang'])->name('Xoa');
+        });
+    });
+});
 
 
 
-Route::get('Nhap-Hang/Chi-Tiet/DanhSach/{id}', [NhaphangController::class,'danhSachChiTietNhapHang'])->name('PhieuNhap.danhSachChiTiet');
-
-Route::get('/nhap-hang/xoa/{id}', [NhaphangController::class,'xoaNhapHang'])->name('PhieuNhap.Xoa');
-
-
-//size
-
-
-Route::get('Size/DanhSach', [SizeController::class, 'DanhSachSize'])->name('Size.DanhSach');
-Route::get('Size/Them', [SizeController::class, 'Them'])->name('Size.Them');
-Route::post('Size/Them', [SizeController::class, 'XuLyThem'])->name('Size.XuLyThem');
-Route::get('Size/Xoa/{id}', [SizeController::class, 'XuLyXoa'])->name('Size.Xoa');
-Route::get('Size/Sua/{id}', [SizeController::class, 'Sua'])->name('Size.Sua');
-Route::post('Size/Sua/{id}', [SizeController::class, 'XuLySua'])->name('Size.XuLySua');
+Route::middleware('auth')->group(function () {
+    Route::prefix('DonHang')->group(function () {
+        Route::name('DonHang.')->group(function () {
+            Route::get('DanhSach', [DatHangController::class, 'DanhSachDH'])->name('DanhSach');
+            Route::get('DanhSachChiTiet/{id}', [DatHangController::class, 'danhSachChiTietDH'])->name('danhSachChiTiet');
+        });
+    });
+});
 
 
 
-// don hang 
 
 
-Route::get('DonHang/DanhSach', [DatHangController::class, 'DanhSachDH'])->name('DatHang.DanhSach');
-Route::get('Don-Hang/DanhSachChiTiet/{id}', [DatHangController::class,'danhSachChiTietDH'])->name('DonHang.danhSachChiTiet');
+

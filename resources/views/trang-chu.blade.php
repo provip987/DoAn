@@ -45,7 +45,7 @@
       <div class="position-sticky pt-3 sidebar-sticky">
         <ul class="nav flex-column">
         <li class="nav-item">
-            <a class="nav-link" href="{{route('DSNV')}}">
+            <a class="nav-link" href="{{route('NhanVien.DanhSach')}}">
               <span data-feather="user" class="align-text-bottom"></span>
                 ADMIN
             </a>
@@ -83,7 +83,7 @@
           </li> 
          
           <li class="nav-item">
-            <a class="nav-link" href="{{route('DatHang.DanhSach')}}">  
+            <a class="nav-link" href="{{route('DonHang.DanhSach')}}">  
               <span data-feather="user" class="align-text-bottom"></span>
                 Đơn Hàng 
             </a>

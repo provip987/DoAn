@@ -14,12 +14,12 @@
             <td><input type="text" name="ten" value = "{{  $dsNV->ten }}"/></td>
         </tr>
         <tr>
-            <th>dia chi</th>
+            <th>Địa Chỉ</th>
             <td><input type="text" name="dia_chi" value = "{{$dsNV->dia_chi }}"/></td>
         </tr>
         <tr>
-            <th>so dien thoai</th>
-            <td><input type="text" name="so_dien_thoai" value = "{{ $dsNV->so_dien_thoai}}" /></td>
+            <th>Số Điện Thoại</th>
+            <td><input type="text" name="so_dien_thoai" value = "{{ $dsNV->sdt}}" /></td>
         </tr>
         <tr>
             <th>Tên Đăng Nhập</th>
