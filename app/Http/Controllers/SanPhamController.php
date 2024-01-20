@@ -126,8 +126,6 @@ class SanPhamController extends Controller
     public function ThemChiTiet($san_pham_id){
         $sanPham = san_pham::find($san_pham_id);
         $dsSize=size::all();
-     
-    
         return view('SanPham/chitietSanPham/them', compact('sanPham','dsSize'));
     }
     

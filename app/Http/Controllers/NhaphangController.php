@@ -4,16 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\chi_tiet_san_pham;
 use Illuminate\Http\Request;
-use Controllers\NhaCungCapController;
 use App\Models\nha_cung_cap;
 use App\Models\chi_tiet_nhap_hang;
 use App\Models\san_pham;
 
 use App\Models\size;
 use App\Models\nhap_hang;
-
-
-use Controllers\SanPhamController;
 
 class NhaphangController extends Controller
 {

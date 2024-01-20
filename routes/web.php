@@ -9,7 +9,7 @@ use App\Http\Controllers\KhachHangController;
 use App\Http\Controllers\NhanVienController;
 use App\Http\Controllers\NhaCungCapController;
 use App\Http\Controllers\NhaphangController;
-use App\Http\Controllers\PhieuXuatController;
+use App\Http\Controllers\DatHangController;
 use App\Http\Controllers\DanhGiaController;
 use App\Http\Controllers\SizeController;
 
@@ -134,3 +134,11 @@ Route::post('Size/Them', [SizeController::class, 'XuLyThem'])->name('Size.XuLyTh
 Route::get('Size/Xoa/{id}', [SizeController::class, 'XuLyXoa'])->name('Size.Xoa');
 Route::get('Size/Sua/{id}', [SizeController::class, 'Sua'])->name('Size.Sua');
 Route::post('Size/Sua/{id}', [SizeController::class, 'XuLySua'])->name('Size.XuLySua');
+
+
+
+// don hang 
+
+
+Route::get('DonHang/DanhSach', [DatHangController::class, 'DanhSachDH'])->name('DatHang.DanhSach');
+Route::get('Don-Hang/DanhSachChiTiet/{id}', [DatHangController::class,'danhSachChiTietDH'])->name('DonHang.danhSachChiTiet');

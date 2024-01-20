@@ -81,6 +81,12 @@
                 Quản lý Nhà Cung Cấp
             </a>
           </li> 
+          <li class="nav-item">
+            <a class="nav-link" href="{{route('DatHang.DanhSach')}}">  
+              <span data-feather="user" class="align-text-bottom"></span>
+                Đơn Hàng 
+            </a>
+          </li> 
          
           <li class="nav-item">
             <a class="nav-link" href="{{route('PhieuNhap.DanhSach')}}">  

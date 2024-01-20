@@ -28,8 +28,8 @@
     </tr>
     @forelse($nhapHang->chiTietNhapHang as $chiTiet)
     <tr>
+    <td>{{ $chiTiet->id }}</td>
         <td>{{ $chiTiet->nhap_hang_id }}</td>
-        <td>{{ $chiTiet->id }}</td>
         <td>{{ $chiTiet->san_pham_id }}</td>
         <td>{{ $chiTiet->size_id }}</td>
         <td>{{ $chiTiet->so_luong }}</td>
