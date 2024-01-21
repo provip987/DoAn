@@ -25,12 +25,30 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get("/khach-hang",[APIKhachHangController::class,"layDanhSach"]);
 Route::post("/khach-hang",[APIKhachHangController::class,"themMoi"]);
 
-Route::get('/khach-hang/thong-tin', [APIKhachHangController::class, 'layThongTinNguoiDung']);
+//Route::get('/khach-hang/thong-tin', [APIKhachHangController::class, 'layThongTinNguoiDung']);
 
 
 // routes/api.php
 
-Route::post("/dang-nhap",[APIKhachHangController::class,"dangNhap"]);
+//Route::post("/dang-nhap",[APIKhachHangController::class,"dangNhap"]);
+Route::post("/dang-nhap",[APIKhachHangController::class,"login"]);
+Route::group([
+    'middleware' => 'api',
+    //'prefix' => 'auth'
+], function ($router) {
+    Route::get('/khach-hang/thong-tin', [APIKhachHangController::class, 'layThongTinNguoiDung']);
+    Route::post("/dathang",[APIDonHangController::class,"datHang"]);
+    // Route::post('login', 'AuthController@login');
+    Route::post('logout', [APIKhachHangController::class,"logout"]);
+    // Route::post('refresh',  [APIKhachHangController::class, 'refresh']);
+    // Route::post('me', [APIKhachHangController::class, 'me']);
+    Route::post("/add-favorite-product",[APIKhachHangController::class,"addFavoriteProduct"]);
+    Route::get('/get-favorite-product', [APIKhachHangController::class, 'getFavoriteProduct']);
+    Route::get('/get-orders', [APIKhachHangController::class, 'getOrders']);
+    Route::post('/dat-hang', [APIKhachHangController::class, 'datHang']);
+});
+
+
 
 Route::get("/san-pham",[APISanPhamController::class,"layDanhSach"]);
 Route::get("/san-pham/{id}",[APISanPhamController::class,"chitietsanpham"]);
@@ -43,4 +61,4 @@ Route::get("/san-pham-theo-loai/{id}",[APILoaiSanPhamController::class,"dsSanPha
 
 
 Route::get("/dat-hang",[APIDonHangController::class,"danhSachDonHang"]);
-Route::post('/dat-hang', [APIDonHangController::class, 'datHang']);
+//Route::post('/dat-hang', [APIDonHangController::class, 'datHang']);

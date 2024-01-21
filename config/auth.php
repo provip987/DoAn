@@ -14,7 +14,8 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        //'guard' => 'web',
+        'guard' => 'api',
         'passwords' => 'users',
     ],
 
@@ -41,9 +42,11 @@ return [
             'provider' => 'users',
         ],
         'api' => [
-            'driver' => 'passport',
+            // 'driver' => 'passport',
+            // 'provider' => 'khach_hang',
+            //'hash' => false,
+            'driver' => 'jwt',
             'provider' => 'khach_hang',
-            'hash' => false,
         ],
     ],
    
