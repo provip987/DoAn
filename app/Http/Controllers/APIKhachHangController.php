@@ -243,6 +243,7 @@ class APIKhachHangController extends Controller
             })
             ->select('dat_hang.id', 'chi_tiet_dat_hang.tong_tien', 'san_pham.gia',
                 'chi_tiet_dat_hang.so_luong', 'chi_tiet_dat_hang.tong_tien', 'hinh_anh.url', 'san_pham.ten_san_pham', 'ghi_chu', 'trang_thai')
+            ->orderBy('dat_hang.created_at', 'desc')
             ->get();
             
             return response()->json([
