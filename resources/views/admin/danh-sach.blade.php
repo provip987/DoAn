@@ -10,7 +10,7 @@
         <h1 class="h2">DANH SÁCH ADMIN</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group me-2">
-            <a href="{{ route('themnv') }}" type="button" class="btn btn-sm btn-outline-secondary" >Thêm Admin</a>
+            <a href="{{ route('NhanVien.Them') }}" type="button" class="btn btn-sm btn-outline-secondary" >Thêm Admin</a>
           </div>
           
         </div>
@@ -37,12 +37,12 @@
         <td>{{ $dsnv->ten }}</td>
         <td>{{ $dsnv->dia_chi }}</td>
         <td>{{ $dsnv->email }}</td>
-        <td>{{ $dsnv->sdt }}</td>
+        <td>{{ $dsnv->sdt}}</td>
         <td>{{ $dsnv->ten_dang_nhap }}</td>
         <td>{{ $dsnv->password }}</td>
         <td>{{ $dsnv->quyen_id}}</td>
         <td>
-            <a href="{{ route('suanhanvien', ['id' => $dsnv->id ])}}">Sửa</a> |<a href="{{ route('xoanhanvien', ['id' => $dsnv->id ])}}">Xoá</a>
+            <a href="{{ route('NhanVien.Sua', ['id' => $dsnv->id ])}}">Sửa</a> |<a href="{{ route('NhanVien.Xoa', ['id' => $dsnv->id ])}}">Xoá</a>
         </td>
         
     <tr>

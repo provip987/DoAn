@@ -7,7 +7,7 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">THÊM ADMIN</h1>
 </div>
-<form method="POST" action="{{route('xulythemnv')}}"  enctype="multipart/form-data">
+<form method="POST" action="{{route('NhanVien.XuLyThem')}}"  enctype="multipart/form-data">
 @csrf
     <table border=0>
         <tr>
@@ -60,7 +60,7 @@
         </tr>
         <tr>
             <th>Quyền</th>
-            <td><input type="text" name="quyen"  placeholder="Nhập quyền ID"/>
+            <td><input type="text" name="quyen_id"  placeholder="Nhập quyền ID"/>
             @error('quyen')
     <span class="error-message">{{ $message }}</span>
     @enderror</td>
