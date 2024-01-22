@@ -23,7 +23,7 @@ class APIKhachHangController extends Controller
      */
     public function __construct()
     {
-       $this->middleware('auth:api', ['except' => ['login']]);
+       $this->middleware('auth:api', ['except' => ['login', 'layDanhSach', 'themMoi']]);
     }
     /**
      * Get a JWT via given credentials.
@@ -302,6 +302,29 @@ class APIKhachHangController extends Controller
                 'message' => 'Lỗi trong quá trình đặt hàng: ' . $e->getMessage()
             ]);
         }
+    }
+
+    public function changePassword(Request $request)
+    {
+        $this->validate($request, [
+            'password' => 'required|string'
+        ]);
+        $user = auth('api')->user();
+        try {
+        $user =  khach_hang::find($user->id);
+        $user->password =  Hash::make($request->password);
+        $user->save();
+        return response()->json([
+            'success' => true,
+            'message' => 'Đổi thành công'
+        ]);
+
+    } catch (\Exception $e) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Lỗi trong quá trình xử lý: ' . $e->getMessage()
+        ]);
+    }
     }
 
 }
