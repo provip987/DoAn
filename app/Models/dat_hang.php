@@ -10,6 +10,10 @@ class dat_hang extends Model
     use HasFactory;
 
     protected $table='dat_hang';
+    protected $fillable = [
+        'trang_thai', 
+       
+    ];
     public function chi_tiet()
     {
         return $this->hasMany(chi_tiet_dat_hang::class, 'dat_hang_id', 'id');

@@ -22,6 +22,7 @@ class SanPhamController extends Controller
         public function Them(){
             $DsLoai = loai::all();
             return view('SanPham/them',compact('DsLoai'));
+            
         }
         public function XuLyThem(SanPhamRequest $rq){
     

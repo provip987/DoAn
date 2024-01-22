@@ -26,7 +26,7 @@ class APIKhachHangController extends Controller
     {
 
 
-       $this->middleware('auth:api', ['except' => ['login', 'layDanhSach', 'themMoi']]);
+       $this->middleware('auth:api', ['except' => ['login', 'layDanhSach', 'themMoi','datHang']]);
 
     }
     /**
@@ -256,7 +256,7 @@ class APIKhachHangController extends Controller
                      ->on('chi_tiet_san_pham.size_id', '=', 'chi_tiet_dat_hang.size_id');
             })
             ->select('dat_hang.id', 'chi_tiet_dat_hang.tong_tien', 'san_pham.gia',
-                'chi_tiet_dat_hang.so_luong', 'chi_tiet_dat_hang.tong_tien', 'hinh_anh.url', 'san_pham.ten_san_pham', 'ghi_chu', 'trang_thai')
+                'chi_tiet_dat_hang.so_luong', 'chi_tiet_dat_hang.tong_tien','chi_tiet_dat_hang.size_id', 'hinh_anh.url', 'san_pham.ten_san_pham', 'ghi_chu', 'trang_thai')
             ->orderBy('dat_hang.created_at', 'desc')
             ->get();
             
@@ -296,6 +296,9 @@ class APIKhachHangController extends Controller
                 $chiTietDonHang->so_luong = $chiTiet['so_luong'];
                 $chiTietDonHang->tong_tien = $chiTiet['tong_tien'];
                 $chiTietDonHang->save();
+                $sanpham = chi_tiet_san_pham::where('san_pham_id', $chiTiet['san_pham_id'])->where('size_id', $chiTiet['size_id'])->first();
+                $sanpham->so_luong = $sanpham->so_luong - $chiTiet['so_luong'];
+                $sanpham->save();
             }
 
             // Hoàn thành transaction

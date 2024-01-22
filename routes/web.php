@@ -172,6 +172,7 @@ Route::middleware('auth')->group(function () {
         Route::name('DonHang.')->group(function () {
             Route::get('DanhSach', [DatHangController::class, 'DanhSachDH'])->name('DanhSach');
             Route::get('DanhSachChiTiet/{id}', [DatHangController::class, 'danhSachChiTietDH'])->name('danhSachChiTiet');
+            Route::put('/cap-nhat-trang-thai/{id}', [DatHangController::class, 'capNhatTrangThai'])->name('capNhatTrangThai');
         });
     });
 });

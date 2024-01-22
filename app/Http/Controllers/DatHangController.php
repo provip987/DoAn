@@ -8,9 +8,10 @@ class DatHangController extends Controller
 {
     public function DanhSachDH()
     {
-       $DsDh=dat_hang::all();
-       return view('Dat_Hang.danh-sach',compact('DsDh'));
+        $DsDh = dat_hang::orderBy('created_at', 'desc')->get();
+        return view('Dat_Hang.danh-sach', compact('DsDh'));
     }
+    
     public function danhSachChiTietDH($id)
     {
         $datHang = dat_hang::find($id);
@@ -25,6 +26,20 @@ class DatHangController extends Controller
         }
 
         return view('Dat_Hang/danh-sach-chi-tiet', compact('datHang','chiTietDatHang'));
+    }
+    public function capNhatTrangThai(Request $request, $id)
+    {
+        $datHang = dat_hang::find($id);
+
+        if ($datHang) {
+            $datHang->update([
+                'trang_thai' => $request->trang_thai,
+            ]);
+
+            return redirect()->back()->with('thong_bao', 'Cập nhật trạng thái thành công.');
+        }
+
+        return redirect()->back()->with('thong_bao', 'Đơn hàng không tồn tại.');
     }
 
 }

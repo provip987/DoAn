@@ -4,6 +4,10 @@
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
+// resources/js/bootstrap.js
+import 'bootstrap';
+require('./bootstrap');
+
 import axios from 'axios';
 window.axios = axios;
 
