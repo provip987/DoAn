@@ -23,7 +23,7 @@ class APIKhachHangController extends Controller
      */
     public function __construct()
     {
-       $this->middleware('auth:api', ['except' => ['login']]);
+       $this->middleware('auth:api', ['except' => ['login','themMoi']]);
     }
     /**
      * Get a JWT via given credentials.
