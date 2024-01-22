@@ -11,6 +11,7 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Models\favorite_product;
 use App\Models\san_pham;
 use App\Models\dat_hang;
+use App\Models\chi_tiet_san_pham;
 use App\Models\chi_tiet_dat_hang;
 use Illuminate\Support\Facades\DB;
 class APIKhachHangController extends Controller
@@ -23,7 +24,10 @@ class APIKhachHangController extends Controller
      */
     public function __construct()
     {
-       $this->middleware('auth:api', ['except' => ['login','themMoi']]);
+
+
+       $this->middleware('auth:api', ['except' => ['login', 'layDanhSach', 'themMoi']]);
+
     }
     /**
      * Get a JWT via given credentials.
@@ -239,7 +243,8 @@ class APIKhachHangController extends Controller
         try{
             $user = auth('api')->user();
             $orders = dat_hang::where('khachhang_id', $user->id)
-            ->select('id', 'tong_tien', 'trang_thai', 'ghi_chu')
+            ->select('id', 'tong_tien', 'trang_thai', 'ghi_chu','created_at')
+            ->orderBy('dat_hang.created_at', 'desc')
             ->get();
 
             $details = dat_hang::where('khachhang_id', $user->id)
@@ -290,6 +295,10 @@ class APIKhachHangController extends Controller
                 $chiTietDonHang->so_luong = $chiTiet['so_luong'];
                 $chiTietDonHang->tong_tien = $chiTiet['tong_tien'];
                 $chiTietDonHang->save();
+
+                $sanpham = chi_tiet_san_pham::where('san_pham_id', $chiTiet['san_pham_id'])->where('size_id', $chiTiet['size_id'])->first();
+                $sanpham->so_luong = $sanpham->so_luong - $chiTiet['so_luong'];
+                $sanpham->save();
             }
 
             // Hoàn thành transaction
@@ -301,6 +310,7 @@ class APIKhachHangController extends Controller
             ]);
 
         } catch (\Exception $e) {
+            dd($e->getMessage());
             DB::rollback();
             // Ghi log lỗi
             \Log::error('Lỗi đặt hàng: ' . $e->getMessage());
@@ -311,6 +321,29 @@ class APIKhachHangController extends Controller
                 'message' => 'Lỗi trong quá trình đặt hàng: ' . $e->getMessage()
             ]);
         }
+    }
+
+    public function changePassword(Request $request)
+    {
+        $this->validate($request, [
+            'password' => 'required|string'
+        ]);
+        $user = auth('api')->user();
+        try {
+        $user =  khach_hang::find($user->id);
+        $user->password =  Hash::make($request->password);
+        $user->save();
+        return response()->json([
+            'success' => true,
+            'message' => 'Đổi thành công'
+        ]);
+
+    } catch (\Exception $e) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Lỗi trong quá trình xử lý: ' . $e->getMessage()
+        ]);
+    }
     }
 
 }

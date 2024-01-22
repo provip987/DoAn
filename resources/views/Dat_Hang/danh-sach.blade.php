@@ -18,6 +18,7 @@
         <th>Tổng Tiền</th>
         <th>Ghi Chú</th>
         <th>Trạng Thái</th>
+        <th>Ngày Đặt</th>
         <th>Thao Tác</th>
     </tr>
     @forelse($DsDh as $Dh)
@@ -27,8 +28,7 @@
         <td>{{$Dh->tong_tien}}</td>
         <td>{{$Dh->ghi_chu}}</td>
         <td>{{$Dh->trang_thai}}</td>
-
-
+        <td>{{$Dh->created_at}}</td>
         <td>
         <a href="{{ route('DonHang.danhSachChiTiet', ['id' => $Dh->id]) }}">Chi Tiết</a>
         </td>

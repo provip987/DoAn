@@ -32,6 +32,7 @@ Route::post("/khach-hang",[APIKhachHangController::class,"themMoi"]);
 
 //Route::post("/dang-nhap",[APIKhachHangController::class,"dangNhap"]);
 Route::post("/dang-nhap",[APIKhachHangController::class,"login"]);
+Route::post("/change-password",[APIKhachHangController::class,"changePassword"]);
 Route::group([
     'middleware' => 'api',
     //'prefix' => 'auth'
