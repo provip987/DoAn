@@ -11,8 +11,8 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Models\favorite_product;
 use App\Models\san_pham;
 use App\Models\dat_hang;
-use App\Models\chi_tiet_san_pham;
 use App\Models\chi_tiet_dat_hang;
+use App\Models\chi_tiet_san_pham;
 use Illuminate\Support\Facades\DB;
 class APIKhachHangController extends Controller
 {
@@ -257,6 +257,7 @@ class APIKhachHangController extends Controller
             })
             ->select('dat_hang.id', 'chi_tiet_dat_hang.tong_tien', 'san_pham.gia',
                 'chi_tiet_dat_hang.so_luong', 'chi_tiet_dat_hang.tong_tien', 'hinh_anh.url', 'san_pham.ten_san_pham', 'ghi_chu', 'trang_thai')
+            ->orderBy('dat_hang.created_at', 'desc')
             ->get();
             
             return response()->json([
@@ -295,10 +296,6 @@ class APIKhachHangController extends Controller
                 $chiTietDonHang->so_luong = $chiTiet['so_luong'];
                 $chiTietDonHang->tong_tien = $chiTiet['tong_tien'];
                 $chiTietDonHang->save();
-
-                $sanpham = chi_tiet_san_pham::where('san_pham_id', $chiTiet['san_pham_id'])->where('size_id', $chiTiet['size_id'])->first();
-                $sanpham->so_luong = $sanpham->so_luong - $chiTiet['so_luong'];
-                $sanpham->save();
             }
 
             // Hoàn thành transaction
