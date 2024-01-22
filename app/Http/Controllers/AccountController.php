@@ -39,6 +39,7 @@ class AccountController extends Controller {
 
 
     public function KTLogin(Request $rq) {
+       
         $acc = admin::where('ten_dang_nhap', $rq->ten_dang_nhap)->first();
 
         if(Hash::check($rq->password, $acc->password)) {

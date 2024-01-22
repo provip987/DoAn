@@ -107,7 +107,7 @@
                 </div>
             </div>
             <input type="submit" value="Đăng nhập" class="form-submit">
-            <a href="{{ route('Dangky') }}">Đăng ký tài khoản</a>
+     
         </form>
     </div>
    

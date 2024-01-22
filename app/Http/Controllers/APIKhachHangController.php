@@ -94,14 +94,23 @@ class APIKhachHangController extends Controller
         return response()->json(['message' => 'Successfully logged out']);
     }
 
-    public function layDanhSach()
+    public function layDanhSach() 
     {
-        $dsKhachHang = khach_hang::all();
+       $dsKhachHang = khach_hang::all();
+    
+      if ( $dsKhachHang->isEmpty()) {
         return response()->json([
-            'success' => true,
-            'data' => $dsKhachHang
-        ]);
-    } 
+          'success' => false,
+          'message' => 'Danh sách khách hàng trống'
+        ], 404); 
+      }
+    
+      return response()->json([
+         'success' => true,
+         'data' =>  $dsKhachHang
+      ], 200);
+    
+    }
        public function dangNhap(Request $rq)
     {
         try {
