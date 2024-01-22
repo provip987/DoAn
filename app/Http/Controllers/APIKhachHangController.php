@@ -12,6 +12,7 @@ use App\Models\favorite_product;
 use App\Models\san_pham;
 use App\Models\dat_hang;
 use App\Models\chi_tiet_dat_hang;
+use App\Models\chi_tiet_san_pham;
 use Illuminate\Support\Facades\DB;
 class APIKhachHangController extends Controller
 {
@@ -282,6 +283,11 @@ class APIKhachHangController extends Controller
                 $chiTietDonHang->so_luong = $chiTiet['so_luong'];
                 $chiTietDonHang->tong_tien = $chiTiet['tong_tien'];
                 $chiTietDonHang->save();
+
+                $sanpham = chi_tiet_san_pham::where('san_pham_id', $chiTiet['san_pham_id'])->where('size_id', $chiTiet['size_id'])->first();
+                $sanpham->so_luong = $sanpham->so_luong - $chiTiet['so_luong'];
+                $sanpham->save();
+
             }
 
             // Hoàn thành transaction
@@ -293,6 +299,7 @@ class APIKhachHangController extends Controller
             ]);
 
         } catch (\Exception $e) {
+            dd($e->getMessage());
             DB::rollback();
             // Ghi log lỗi
             \Log::error('Lỗi đặt hàng: ' . $e->getMessage());
