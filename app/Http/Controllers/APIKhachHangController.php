@@ -44,8 +44,7 @@ class APIKhachHangController extends Controller
             return response()->json(['error' => 'Unauthorized'], 401);
         }
         // Generate the JWT token
-        $token = auth()->login($user);
-        
+        $token = auth('api')->login($user);
         return $this->respondWithToken($token);
     }
     /**
@@ -60,7 +59,7 @@ class APIKhachHangController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 0
+            'expires_in' => auth('api')->factory()->getTTL() * 60
         ]);
     }
      /**
